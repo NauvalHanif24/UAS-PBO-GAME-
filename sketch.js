@@ -7,6 +7,7 @@ function setup(){
     maps = new Map(600,400);
     hero = new Hero(35,35,300,200,100,0);
     lvl = new Level(0,0,0);
+    lvl.setLevel(0);
     maps.init();
 }
 
@@ -92,12 +93,16 @@ class Level{
         this.maxLevel = maxLevel;
     }
 
-    setLevel(){
-
+    setLevel(level){
+        this.currentLevel = level;
     }
 
     getCurrentLevel(){
-        
+        return this.currentLevel;
+    }
+    
+    increaseLevel(){
+        this.currentLevel+=1;
     }
 }
 
