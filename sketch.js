@@ -183,3 +183,25 @@ class Hero extends Entity{
 
     }
 }
+
+class Map{
+    constructor(width, height){
+        this.width = width;
+        this.height = height;
+        this.monsters = [];
+    }
+
+    init(){
+        createCanvas(this.width,this.height);
+        for(let i = 0; i<10;i++){
+        var posX = random(-200,800);
+        var posY = random(-200,400);
+        var mon = new Monster(10, 20, posX, posY);
+        this.monsters.push(mon)
+        }
+    }
+
+    move(){
+        
+    }
+}
