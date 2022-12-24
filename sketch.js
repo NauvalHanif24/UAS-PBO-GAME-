@@ -48,3 +48,55 @@ function draw(){
         hero.life = 100;
     }
 }
+
+class Entity{
+    constructor(height, width, x, y){
+        this.height = height;
+        this.width = width;
+        this.x = x;
+        this.y = y;
+    }
+
+    attack(){
+        noFill();
+        stroke(0);
+        do{
+        i+= 10;
+        circle(this.x+15 ,this.y+15,i);
+        // fill(200);
+        fill(200);
+        if(i>100){
+            i = 0;
+        }
+    }while(i<-1)
+    
+    }
+    moveRight(){
+            this.x += 2;
+        }
+    moveLeft(){
+            this.x -= 2;
+    }
+    moveDown(){
+            this.y += 2;
+    }
+    moveUp(){
+            this.y -= 2;
+    }
+}
+
+class Level{
+    constructor(currentLevel, latestLevel, maxLevel){
+        this.currentLevel = currentLevel;
+        this.latestLevel = latestLevel;
+        this.maxLevel = maxLevel;
+    }
+
+    setLevel(){
+
+    }
+
+    getCurrentLevel(){
+        
+    }
+}
