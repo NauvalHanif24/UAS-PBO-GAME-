@@ -100,3 +100,86 @@ class Level{
         
     }
 }
+
+class Monster extends Entity{
+    constructor(x, y, width, height){
+        super(x,y,width,height);
+        this.life = 2;
+        this.color = 0;
+        this.effect = 0;
+        this.type = 0;
+    }
+
+    show(){
+        if(this.x < hero.x){
+            this.x+=1;
+        }else{
+            this.x-=1;
+        }
+
+        if(this.y < hero.y){
+            this.y+=1;
+        }else{
+            this.y-=1;
+        }
+
+        
+        noStroke()
+        fill(200);
+        square(this.x,this.y,this.width);
+        
+    }
+
+    moveRandom(){
+
+    }
+
+    saveScore(){
+
+    }
+}
+
+class Hero extends Entity{
+    constructor(height, width, x, y, life, score){
+        super(height, width, x, y);
+        this.life = life;
+        this.score = score;
+    }
+    show(){
+        square(this.x,this.y,30);
+        
+    }
+
+    HeroAttack(){
+        if(frameCount % 2 == 0){
+            this.attack();
+        }
+    }
+
+    move(){
+        if(keyIsDown(UP_ARROW)){
+            this.moveUp();
+        }
+        if(keyIsDown(DOWN_ARROW)){
+            this.moveDown();
+        }
+        if(keyIsDown(LEFT_ARROW)){
+            this.moveLeft();
+        }
+        if(keyIsDown(RIGHT_ARROW)){
+            this.moveRight();
+        }
+    }
+
+    increaseScore(){
+
+    }
+
+    calculateLife(){
+
+    }
+
+    saveScore(){
+
+    }
+}
