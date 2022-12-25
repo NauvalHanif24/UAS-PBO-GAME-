@@ -16,6 +16,7 @@ function draw(){
     noStroke();
     text(`Score : ${hero.score}`,20,20);
     text(`Health : ${hero.life}`,20,40);
+    text(`Floor : ${lvl.showCurrentLevel()}`,20,60);//show current level
 
     hero.show();
     hero.move();
@@ -36,6 +37,7 @@ function draw(){
         if(dist(i.x,i.y,hero.x,hero.y) < 20){
             hero.life --;
         }
+        i.show()
     }
 
     if(maps.monsters.length < 1){
@@ -47,13 +49,27 @@ function draw(){
         }
     }
     
-        i.show()
+       
     
     if(hero.life < 0){
-        maps.init();
-        hero.life = 100;
+        noLoop()
+        background(0);
+        fill(255);
+        text('GAME OVER',245,200);
+        text(`Highest Level : ${lvl.showCurrentLevel()}`,235,240);
+        text(`Highest Score : ${hero.score}`,235,220);
+        text('press any key to restart',215,270);
     }
 
+}
+
+function keyPressed(){
+    if(isLooping()){
+     
+    }else{
+    setup();
+    loop();
+    }
 }
 
 class Entity{
@@ -70,7 +86,6 @@ class Entity{
         do{
         i+= 10;
         circle(this.x+15 ,this.y+15,i);
-        // fill(200);
         fill(200);
         if(i>100){
             i = 0;
@@ -165,7 +180,7 @@ class Hero extends Entity{
         square(this.x,this.y,30);
     }
     HeroAttack(){
-        if(frameCount % 2 == 0){
+        if(frameCount % 3 == 0){
             this.attack();
         }
     }
