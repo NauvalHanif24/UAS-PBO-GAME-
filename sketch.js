@@ -16,6 +16,8 @@ function draw(){
     background(220);
     fill(0);
     noStroke();
+    text(`Score : ${hero.score}`,20,20);
+    text(`Health : ${hero.life}`,20,40);
     text(frameCount,20,20);
     text(hero.life,20,40);
 
@@ -28,9 +30,10 @@ function draw(){
 
         
         if(dist(i.x,i.y,hero.x,hero.y) < 75 && frameCount % 30 == 0 ){
-            i.life -=2;
+            i.life -=1;
             if(i.life < 0 ){
             maps.monsters.splice(maps.monsters.indexOf(i),1);
+            hero.increaseScore();
 
             }
         }
@@ -148,7 +151,7 @@ class Hero extends Entity{
     constructor(height, width, x, y, life, score){
         super(height, width, x, y);
         this.life = life;
-        this.score = score;
+        this.score = 0;
     }
     show(){
         square(this.x,this.y,30);
@@ -177,7 +180,7 @@ class Hero extends Entity{
     }
 
     increaseScore(){
-
+        this.score++;
     }
 
     calculateLife(){
