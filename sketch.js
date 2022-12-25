@@ -2,7 +2,6 @@ let hero,lvl,maps;
 let i = 0;
 
 function setup(){
-    // createCanvas(600, 400);
     frameRate(60);
     maps = new Map(600,400);
     hero = new Hero(35,35,300,200,100,0);
@@ -12,29 +11,25 @@ function setup(){
 }
 
 function draw(){
-    
     background(220);
     fill(0);
     noStroke();
     text(`Score : ${hero.score}`,20,20);
     text(`Health : ${hero.life}`,20,40);
-    text(frameCount,20,20);
-    text(hero.life,20,40);
 
     hero.show();
     hero.move();
     hero.HeroAttack();
 
     for(let i of maps.monsters){
-        i.show()
-
-        
+       
         if(dist(i.x,i.y,hero.x,hero.y) < 75 && frameCount % 30 == 0 ){
             i.life -=1;
             if(i.life < 0 ){
             maps.monsters.splice(maps.monsters.indexOf(i),1);
             hero.increaseScore();
-
+            }else{
+                i.type ++;//if monster health decreased but not depleted
             }
         }
 
@@ -45,12 +40,20 @@ function draw(){
 
     if(maps.monsters.length < 1){
         maps.init();
+        lvl.increaseLevel();
+        hero.life += 10;
+        if(hero.life >= 100){
+            hero.life = 100;
+        }
     }
-      
+    
+        i.show()
+    
     if(hero.life < 0){
         maps.init();
         hero.life = 100;
     }
+
 }
 
 class Entity{
@@ -130,11 +133,16 @@ class Monster extends Entity{
         }else{
             this.y-=1;
         }
-
         
+        if(this.type == 0){//if enemies is not damaged
         noStroke()
-        fill(200);
+        fill(0,255,0);
         square(this.x,this.y,this.width);
+        }else{
+        noStroke()
+        fill(255,0,0);//if enemise is damaged but not dead
+        square(this.x,this.y,this.width);   
+        }
         
     }
 
@@ -155,9 +163,7 @@ class Hero extends Entity{
     }
     show(){
         square(this.x,this.y,30);
-        
     }
-
     HeroAttack(){
         if(frameCount % 2 == 0){
             this.attack();
